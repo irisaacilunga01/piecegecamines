@@ -119,14 +119,14 @@ export const columns: ColumnDef<Payment>[] = [
               <TooltipTrigger asChild>
                 <Link
                   className="flex gap-3"
-                  href={`/dashboard/animation/ajouter`}
+                  href={`/dashboard/bonreception/ajouter`}
                 >
                   <Plus className="h-7 w-7 rounded-full text-white bg-green-800 hover:bg-green-600 p-2" />
                 </Link>
               </TooltipTrigger>
               <TooltipContent className="flex gap-2 justify-center items-center">
                 <Plus className="h-6 w-6 rounded-full" />
-                <p>Ajouter une nouvelle animation</p>
+                <p>Ajouter un stock</p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
@@ -136,14 +136,14 @@ export const columns: ColumnDef<Payment>[] = [
               <TooltipTrigger asChild>
                 <Link
                   className="flex gap-3"
-                  href={`/dashboard/animation/${row.original.id}`}
+                  href={`/dashboard/bonreception/${row.original.id}`}
                 >
                   <Pen className="h-7 w-7 rounded-full text-white bg-blue-800 hover:bg-blue-600  p-2" />
                 </Link>
               </TooltipTrigger>
               <TooltipContent className="flex gap-2 justify-center items-center">
                 <Pen className="h-6 w-6 rounded-full" />
-                <p>modifier l&apos;animation N°{row.original.id}</p>
+                <p>modifier le stock N°{row.original.id}</p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
@@ -158,14 +158,14 @@ export const columns: ColumnDef<Payment>[] = [
                 </TooltipTrigger>
                 <TooltipContent className="flex gap-2 justify-center items-center">
                   <Delete className="h-6 w-6 rounded-full" />
-                  <p>supprimer l&apos;animation N°{row.original.id}</p>
+                  <p>supprimer l&apos;bonreception N°{row.original.id}</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
 
             <DialogContent>
               <DialogHeader>
-                <DialogTitle> Suppression animation</DialogTitle>
+                <DialogTitle> Suppression bonreception</DialogTitle>
                 <DialogDescription>
                   Etes-vous sur de supprimer définitivement le stock n°
                   {row.original.id} ?
@@ -308,7 +308,7 @@ export function DataTable({ data }: { data: Payment[] }) {
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
-          Total : {table.getFilteredRowModel().rows.length} animations(s).
+          Total : {table.getFilteredRowModel().rows.length} bonreceptions(s).
         </div>
         <div className="space-x-2">
           <Button
