@@ -4,21 +4,23 @@ import { Bonreception } from "@/lib/types";
 import { DataTable } from "./dataTable";
 
 export default async function Page() {
-  // Créez une instance du client Supabase
   const supabase = await createClient();
 
-  // Récupérez les données de la table 'Bonreception'
-  const { data: rows, error } = await supabase.from("bonreception").select("*");
+  // Récupérez les données de la table 'bonreception' en incluant le nom du fournisseur.
+  const { data: rows, error } = await supabase
+    .from("bonreception")
+    .select("*, fournisseur(nomfournisseur)");
 
-  // Gérer les erreurs de récupération
   if (error) {
     console.error("Erreur lors de la récupération des données :", error);
-    // Vous pouvez aussi lancer une erreur ou retourner un message d'erreur
     return <div>Erreur lors du chargement des données.</div>;
   }
 
-  // Assurez-vous que `rows` est un tableau de Bonreception
-  const bonreceptionData: Bonreception[] = rows || [];
+  // Mappez les données pour avoir le nom du fournisseur directement sur l'objet
+  const bonreceptionData: Bonreception[] = (rows || []).map((row: any) => ({
+    ...row,
+    nomfour: row.fournisseur?.nomfournisseur,
+  }));
 
   return (
     <div className="flex flex-col">

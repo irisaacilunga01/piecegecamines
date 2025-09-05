@@ -4,10 +4,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -16,7 +16,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { addUser, upDateUser } from "@/lib/actions";
-import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 const FormSchema = z.object({
@@ -41,7 +40,7 @@ export function Formulaire({ id = 0, nom = "", email = "", password = "" }) {
     defaultValues: {
       nom,
       email,
-      password,
+      password: "",
     },
   });
 

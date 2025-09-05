@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -15,37 +14,15 @@ import {
 } from "@tanstack/react-table";
 import {
   ArrowUpDown,
-  ChevronDown,
-  MoreHorizontal,
-  Plus,
-  Pen,
-  Delete,
   ChevronLeft,
   ChevronRight,
+  Delete,
+  Pen,
+  Plus,
 } from "lucide-react";
+import * as React from "react";
 
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Demandeur as Payment } from "@/lib/types";
-import Link from "next/link";
 import {
   Dialog,
   DialogClose,
@@ -56,6 +33,15 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import {
   Tooltip,
   TooltipContent,
@@ -64,6 +50,8 @@ import {
 } from "@/components/ui/tooltip";
 import { toast } from "@/components/ui/use-toast";
 import { deleteDemandeur } from "@/lib/actions";
+import { Demandeur as Payment } from "@/lib/types";
+import Link from "next/link";
 export const columns: ColumnDef<Payment>[] = [
   {
     accessorKey: "nummatricule",
@@ -94,6 +82,13 @@ export const columns: ColumnDef<Payment>[] = [
     header: "Téléphone",
     cell: ({ row }) => (
       <div className="capitalize">{row.getValue("numtel")}</div>
+    ),
+  },
+  {
+    accessorKey: "numfonction",
+    header: "Numéro Fonction",
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("numfonction")}</div>
     ),
   },
 

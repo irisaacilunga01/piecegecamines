@@ -11,7 +11,7 @@ export default async function Page() {
   // Requête pour Commandemagasin avec jointure sur Magasindestinataire
   // On utilise la notation de point pour les jointures en mode RPC/REST de Supabase.
   const { data: magasin, error: magasinError } = await supabase
-    .from("Commandemagasin")
+    .from("commandemagasin")
     .select(
       `
       numrecquisition,
@@ -23,7 +23,7 @@ export default async function Page() {
       observation,
       numcompteadebite,
       nummagasin,
-      Magasindestinataire (nommagasin)
+      magasindestinataire (nommagasin)
     `
     );
 
@@ -33,7 +33,7 @@ export default async function Page() {
 
   // Requête pour Commande avec jointures sur Piece et Demandeur
   const { data: commande, error: commandeError } = await supabase
-    .from("Commande")
+    .from("commande")
     .select(
       `
       numbon,
@@ -46,8 +46,8 @@ export default async function Page() {
       dateservie,
       nummatricule,
       numarticle,
-      Piece (nomarticle),
-      Demandeur (nomdemandeur)
+      piece (nomarticle),
+      demandeur (nomdemandeur)
     `
     );
 
@@ -58,13 +58,13 @@ export default async function Page() {
   // On aplatit les données pour qu'elles correspondent aux types
   const magasinsFlattened = magasin?.map((item) => ({
     ...item,
-    nommagasin: (item.Magasindestinataire as any)?.nommagasin || null,
+    nommagasin: (item.magasindestinataire as any)?.nommagasin || null,
   })) as Commandemagasin[];
 
   const commandesFlattened = commande?.map((item) => ({
     ...item,
-    nomarticle: (item.Piece as any)?.nomarticle || null,
-    nomdemandeur: (item.Demandeur as any)?.nomdemandeur || null,
+    nomarticle: (item.piece as any)?.nomarticle || null,
+    nomdemandeur: (item.demandeur as any)?.nomdemandeur || null,
   })) as Commande[];
 
   return (
