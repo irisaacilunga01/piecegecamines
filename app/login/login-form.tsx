@@ -39,7 +39,7 @@ export default function Login() {
           description: "Vous êtes maintenant connecté.",
           className: "bg-green-700",
         });
-        router.push("/dashboard/piece");
+        router.push("/dashboard");
       } else {
         const data = await response.json();
         setError(data.error);
