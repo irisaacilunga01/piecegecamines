@@ -16,9 +16,6 @@
 
 // export default Page;
 
-import { useState } from "react";
-import { Card } from "@/components/ui/card";
-import { ExpandableCard } from "../piece";
 import { fetchAndMapCards } from "../card";
 import Search from "./cardPiece";
 

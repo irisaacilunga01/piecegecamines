@@ -1,8 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
-import React from "react";
-import { ImagesSlider } from "../components/images-slider";
 import Link from "next/link";
+import { ImagesSlider } from "../components/images-slider";
 
 export default function Page() {
   const images = [

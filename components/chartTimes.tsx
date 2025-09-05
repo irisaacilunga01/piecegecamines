@@ -16,33 +16,37 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 
-// const chartData = [
-//   { date: "2024-04-01", revenu_total: 5000 },
-//   // Autres données
-// ];
-
 const chartConfig = {
-  views: {
-    label: "Revenus",
-  },
-  revenu_total: {
-    label: "Revenu Total",
+  quantite_commandee: {
+    label: "Quantité Commandée",
     color: "hsl(var(--chart-1))",
+  },
+  quantite_recue: {
+    label: "Quantité Reçue",
+    color: "hsl(var(--chart-2))",
   },
 } satisfies ChartConfig;
 
 export function ChartTimes({
   chartData,
 }: {
-  chartData: { date: Date | string; revenu_total: number }[];
+  chartData: {
+    date: Date | string;
+    quantite_commandee: number;
+    quantite_recue: number;
+  }[];
 }) {
   const [activeChart, setActiveChart] =
-    React.useState<keyof typeof chartConfig>("revenu_total");
+    React.useState<keyof typeof chartConfig>("quantite_commandee");
 
   const total = React.useMemo(
     () => ({
-      revenu_total: chartData.reduce(
-        (acc, curr) => Number(acc) + Number(curr.revenu_total),
+      quantite_commandee: chartData.reduce(
+        (acc, curr) => acc + Number(curr.quantite_commandee),
+        0
+      ),
+      quantite_recue: chartData.reduce(
+        (acc, curr) => acc + Number(curr.quantite_recue),
         0
       ),
     }),
@@ -53,13 +57,13 @@ export function ChartTimes({
     <Card>
       <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row">
         <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
-          <CardTitle>Reservations</CardTitle>
+          <CardTitle>Flux de stock</CardTitle>
           <CardDescription>
-            Nombres des reservations 3 derniers mois
+            Quantités commandées et reçues par jour
           </CardDescription>
         </div>
         <div className="flex">
-          {["revenu_total"].map((key) => {
+          {["quantite_commandee", "quantite_recue"].map((key) => {
             const chart = key as keyof typeof chartConfig;
             return (
               <button
@@ -111,7 +115,6 @@ export function ChartTimes({
               content={
                 <ChartTooltipContent
                   className="w-[150px]"
-                  nameKey="revenu_total"
                   labelFormatter={(value) => {
                     return new Date(value).toLocaleDateString("fr-FR", {
                       month: "short",
